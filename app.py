@@ -82,7 +82,7 @@ RISK_COLORS = {"High": "#E24B4A", "Medium": "#EF9F27", "Low": "#1D9E75"}
 with col1:
     st.subheader("Churn Risk by Contract Type")
     risk_contract = (
-        filtered.groupby(["Contract", "risk_tier"])
+        filtered.groupby(["Contract", "risk_tier"], observed=True)
         .size()
         .reset_index(name="count")
     )
@@ -118,7 +118,7 @@ col3, col4 = st.columns(2)
 with col3:
     st.subheader("Monthly Revenue at Risk")
     mrr_risk = (
-        filtered.groupby("risk_tier")["MonthlyCharges"]
+        filtered.groupby("risk_tier", observed=True)["MonthlyCharges"]
         .sum()
         .reset_index()
         .rename(columns={"MonthlyCharges": "MRR"})
