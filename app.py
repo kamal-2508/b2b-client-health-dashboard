@@ -151,7 +151,7 @@ if alerts.empty:
     st.info("No renewals due within the selected filters.")
 else:
     st.dataframe(
-        alerts.style.background_gradient(subset=["churn_score"], cmap="RdYlGn_r"),
+        alerts,
         use_container_width=True,
         height=220
     )
